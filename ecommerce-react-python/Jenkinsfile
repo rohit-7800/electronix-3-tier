@@ -1,0 +1,13 @@
+pipeline{
+    agent {'electronix'}
+
+    stages{
+        stage("I am from elecronix"){
+            steps {echo "Hello from Elecronix"}
+        }
+        
+    stage("I am from elecronix Setup"){
+            steps {echo "Elecronix Setup is Working "}
+        }
+    }    
+}
