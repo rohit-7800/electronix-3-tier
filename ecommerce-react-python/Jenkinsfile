@@ -3,7 +3,7 @@ pipeline{
 
     stages{
         stage("I am from elecronix"){
-            steps {echo "Hello from Elecronix"}
+            steps {echo "Hello from Elecronix brand"}
         }
 
     stage("I am from elecronix Setup"){
