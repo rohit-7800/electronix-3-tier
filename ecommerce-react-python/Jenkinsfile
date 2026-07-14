@@ -9,15 +9,16 @@ pipeline {
         AWS_REGION = 'us-east-1'
     }
 
-    stages {
+    stages{
+        stage("Frontend Deployment"){
+            when{
+                changeset "frontend/**"
+            }
 
-        stage('Frontend Deployment') {
-
-            stages {
-
-                stage('Install Dependencies') {
-                    steps {
-                        dir('frontend') {
+            stages{
+                stage('Install Dependencies'){
+                    steps{
+                        dir('frontend'){
                             sh '''
                                 npm install
                             '''
@@ -25,29 +26,25 @@ pipeline {
                     }
                 }
 
-                stage('Run Tests') {
-                    steps {
-                        dir('frontend') {
-                            sh '''
-                                npm test -- --watchAll=false || echo "No Test Configured."
-                            '''
+                stage("Run Tests"){
+                    steps{
+                        dir('frontend'){
+                            sh 'npm test -- --watchAll=false || echo "No Test Configured.."'
                         }
                     }
                 }
 
-                stage('Build') {
-                    steps {
-                        dir('frontend') {
-                            sh '''
-                                npm run build
-                            '''
+                stage("Build"){
+                    steps{
+                        dir('frontend'){
+                            sh 'npm run build'
                         }
                     }
                 }
 
-                stage('Deploy S3') {
-                    steps {
-                        dir('frontend') {
+                stage('Deploy S3'){
+                    steps{
+                        dir('frontend'){
                             sh '''
                                 aws s3 sync dist/ s3://${S3_BUCKET} --delete --region ${AWS_REGION}
                             '''
