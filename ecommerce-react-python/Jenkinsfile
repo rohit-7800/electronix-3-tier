@@ -18,7 +18,7 @@ pipeline {
             stages{
                 stage('Install Dependencies'){
                     steps{
-                        dir('frontend'){
+                        dir('ecommerce-react-python/frontend'){
                             sh '''
                                 npm install
                             '''
@@ -28,7 +28,7 @@ pipeline {
 
                 stage("Run Tests"){
                     steps{
-                        dir('frontend'){
+                        dir('ecommerce-react-python/frontend'){
                             sh 'npm test -- --watchAll=false || echo "No Test Configured.."'
                         }
                     }
@@ -36,7 +36,7 @@ pipeline {
 
                 stage("Build"){
                     steps{
-                        dir('frontend'){
+                        dir('ecommerce-react-python/frontend'){
                             sh 'npm run build'
                         }
                     }
@@ -44,7 +44,7 @@ pipeline {
 
                 stage('Deploy S3'){
                     steps{
-                        dir('frontend'){
+                        dir('ecommerce-react-python/frontend'){
                             sh '''
                                 aws s3 sync dist/ s3://${S3_BUCKET} --delete --region ${AWS_REGION}
                             '''
