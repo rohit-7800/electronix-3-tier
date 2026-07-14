@@ -18,6 +18,7 @@ pipeline {
                 '''
             }
         }
+<<<<<<< HEAD
 
         stage("Provision Docker Engine"){
             steps{
@@ -59,3 +60,7 @@ pipeline {
     } 
 
 }
+=======
+    }
+}
+>>>>>>> e4d2338664ef550717aace949f7bff6d7665d72e
